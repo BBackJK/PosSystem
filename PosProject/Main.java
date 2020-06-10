@@ -5,15 +5,20 @@ import java.util.Scanner;
 import PosProject.Admin.AdminMenu;
 import PosProject.Employee.EmployeeManage;
 import PosProject.Employee.EmployeeMenu;
+import PosProject.Product.ProductManage;
+import PosProject.Sales.SalesManage;
 
 public class Main {
-    public static void main(String[] args) {
 
+    public static EmployeeManage employeeManage = new EmployeeManage();
+    public static ProductManage productManage = new ProductManage();
+    public static SalesManage salesManage = new SalesManage();
+
+    private void login() {
         Scanner sc = new Scanner(System.in);
-
+        
         AdminMenu admin = new AdminMenu();
         EmployeeMenu employee = new EmployeeMenu();
-        EmployeeManage employeeManage = new EmployeeManage();
 
         do {
 
@@ -34,5 +39,10 @@ public class Main {
             }
 
         } while (true);
+    }
+    public static void main(String[] args) {
+        Main main = new Main();
+        main.login();
+        
     }
 }

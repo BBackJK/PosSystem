@@ -2,18 +2,20 @@ package PosProject.Employee;
 
 import java.util.Scanner;
 
+import PosProject.Main;
 import PosProject.Product.ProductManage;
 import PosProject.Sales.Sales;
 import PosProject.Sales.SalesManage;
 import PosProject.Utils.DateOfUtils;
 
 public class EmployeeClient {
-    private ProductManage productManage = new ProductManage();
-    private SalesManage salesManage = new SalesManage();
+
     private DateOfUtils dateUtils = new DateOfUtils();
     private Scanner sc = new Scanner(System.in);
 
-    int totalTodaySales = 0;
+    private ProductManage productManage = Main.productManage;
+    private SalesManage salesManage = Main.salesManage;
+    private int totalTodaySales = 0;
 
     // 직원 상품 판매
     public void employeeSaleProduct() {
@@ -30,11 +32,11 @@ public class EmployeeClient {
             System.out.println();
         }
 
-        productManage.codeOfProductPrint(Integer.toString(keyWord));
+        this.productManage.codeOfProductPrint(Integer.toString(keyWord));
         System.out.println();
         System.out.print("판매할 상품명을 입력하세요: ");
-        String name = sc.nextLine();
-        if (!productManage.nameCheck(name)) {
+        String name = this.sc.nextLine();
+        if (!this.productManage.nameCheck(name)) {
             System.out.println();
             System.out.println("존재하지 않은 상품입니다. 다시 확인해 주세요.");
             System.out.println();
@@ -43,9 +45,9 @@ public class EmployeeClient {
 
         System.out.print("수량을 입력해주세요: ");
         int saleAmount = Integer.parseInt(sc.nextLine());
-        int sales = productManage.saleProduct(name, saleAmount);
-        productManage.save();
-        totalTodaySales += sales;
+        int sales = this.productManage.saleProduct(name, saleAmount);
+        this.productManage.save();
+        this.totalTodaySales += sales;
         System.out.println();
     }
 
@@ -64,14 +66,14 @@ public class EmployeeClient {
             System.out.println();
         }
 
-        productManage.codeOfProductPrint(Integer.toString(keyWord));
+        this.productManage.codeOfProductPrint(Integer.toString(keyWord));
         System.out.println();
     }
 
     public void employeeCheckLackProduct() {
         System.out.println("===== 직원 재고 부족 상품 조회 =====");
         System.out.println();
-        productManage.lackOfProductPrint();
+        this.productManage.lackOfProductPrint();
         System.out.println();
     }
 
@@ -80,7 +82,7 @@ public class EmployeeClient {
         System.out.println();
         System.out.print("발주하실 상품명을 입력해주세요: ");
         String name = sc.nextLine();
-        if (!productManage.nameCheck(name)) {
+        if (!this.productManage.nameCheck(name)) {
             System.out.println();
             System.out.println("존재하지 않은 상품입니다. 다시 확인해 주세요.");
             System.out.println();
@@ -90,8 +92,8 @@ public class EmployeeClient {
         System.out.print("발주하실 수량을 입력해주세요: ");
         int orderAmount = Integer.parseInt(sc.nextLine());
         System.out.println();
-        productManage.orderProduct(name, orderAmount);
-        productManage.save();
+        this.productManage.orderProduct(name, orderAmount);
+        this.productManage.save();
         System.out.println(name + " 상품 발주 완료!");
         System.out.println();
     }
@@ -109,18 +111,18 @@ public class EmployeeClient {
     public void employeeCheckCurrentSales() {
         System.out.println("===== 직원 정산 확인 =====");
         System.out.println();
-        System.out.println("현재까지 판매액은 " + totalTodaySales + " 입니다.");
+        System.out.println("현재까지 판매액은 " + this.totalTodaySales + " 입니다.");
         System.out.println();
     }
 
     public void employeeRecordTotalSales() {
         System.out.println("===== 직원 금일 매출 기록 =====");
         System.out.println();
-        System.out.println("오늘 날짜: " + dateUtils.getToday());
-        System.out.println("오늘 총 매출액: " + totalTodaySales);
+        System.out.println("오늘 날짜: " + this.dateUtils.getToday());
+        System.out.println("오늘 총 매출액: " + this.totalTodaySales);
         System.out.println();
-        salesManage.add(new Sales(dateUtils.getToDate(), totalTodaySales));
-        salesManage.save();
+        this.salesManage.add(new Sales(this.dateUtils.getToday(), this.totalTodaySales));
+        this.salesManage.save();
         System.out.println("오늘 매출액이 기록 되었습니다.");
         System.out.println();
     }

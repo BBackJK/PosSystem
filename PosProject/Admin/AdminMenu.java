@@ -18,7 +18,7 @@ public class AdminMenu {
             System.out.println("4. 월급 관리");
             System.out.println("0. 로그아웃");
             System.out.print("# 메뉴선택 >> ");
-            menu = Integer.parseInt(sc.nextLine());
+            menu = Integer.parseInt(this.sc.nextLine());
             System.out.println();
 
             switch (menu) {
@@ -59,18 +59,18 @@ public class AdminMenu {
             System.out.println("3. 직원 삭제");
             System.out.println("0. 이전 메뉴");
             System.out.print("# 메뉴선택 >> ");
-            menu = Integer.parseInt(sc.nextLine());
+            menu = Integer.parseInt(this.sc.nextLine());
             System.out.println();
 
             switch (menu) {
                 case 1: // 직원 등록
-                    adminClient.adminAddEmployee();
+                    this.adminClient.adminAddEmployee();
                     break;
                 case 2: // 직원 조회
-                    adminClient.adminCheckEmployee();
+                    this.adminClient.adminCheckEmployee();
                     break;
                 case 3: // 직원 삭제
-                    adminClient.adminRemoveEmployee();
+                    this.adminClient.adminRemoveEmployee();
                     break;
                 case 0:
                     System.out.println();
@@ -98,21 +98,21 @@ public class AdminMenu {
             System.out.println("4. 상품 삭제");
             System.out.println("0. 이전 메뉴");
             System.out.print("# 메뉴선택 >> ");
-            menu = Integer.parseInt(sc.nextLine());
+            menu = Integer.parseInt(this.sc.nextLine());
             System.out.println();
 
             switch (menu) {
                 case 1: // 전체 재고 조회
-                    adminClient.adminCheckAllProduct();
+                    this.adminClient.adminCheckAllProduct();
                     break;
                 case 2: // 재고 부족 상품 조회
-                    adminClient.adminCheckLackProduct();
+                    this.adminClient.adminCheckLackProduct();
                     break;
                 case 3: // 상품 추가
-                    adminClient.adminAddProduct();
+                    this.adminClient.adminAddProduct();
                     break;
                 case 4: // 상품 삭제
-                    adminClient.adminRemoveProduct();
+                    this.adminClient.adminRemoveProduct();
                     break;
                 case 0:
                     System.out.println();
@@ -134,19 +134,19 @@ public class AdminMenu {
         do {
             System.out.println("===== 관리자 매출 통계 메뉴 =====");
             System.out.println();
-            System.out.println("1. 당월 매출 조회");
-            System.out.println("2. 당일 매출 조회");
+            System.out.println("1. 월 매출 조회");
+            System.out.println("2. 일 매출 조회");
             System.out.println("0. 이전 메뉴");
             System.out.print("# 메뉴선택 >> ");
-            menu = Integer.parseInt(sc.nextLine());
+            menu = Integer.parseInt(this.sc.nextLine());
             System.out.println();
 
             switch (menu) {
                 case 1: // 당월 매출 조회
-                    adminClient.adminCheckMonthSales();
+                    this.adminClient.adminCheckMonthSales();
                     break;
                 case 2: // 당일 매출 조회
-                    adminClient.adminCheckDaySales();
+                    this.adminClient.adminCheckDaySales();
                     break;
                 case 0:
                     System.out.println();
@@ -174,21 +174,21 @@ public class AdminMenu {
             System.out.println("4. 직원 월급 조회");
             System.out.println("0. 이전 메뉴");
             System.out.print("# 메뉴선택 >> ");
-            menu = Integer.parseInt(sc.nextLine());
+            menu = Integer.parseInt(this.sc.nextLine());
             System.out.println();
 
             switch (menu) {
                 case 1: // 직원 출/퇴근 시간 조회
-                    adminClient.adminCheckCommute();
+                    this.adminClient.adminCheckCommute();
                     break;
                 case 2: // 직원 월급 조회
-                    adminClient.adminCheckMonthlyPay();
+                    this.adminClient.adminCheckMonthlyPay();
                     break;
                 case 3: // 직원 시급 조회
-                    adminClient.adminCheckHourlyPay();
+                    this.adminClient.adminCheckHourlyPay();
                     break;
                 case 4: // 직원 시급 변경
-                    adminClient.adminModifyHourlyPay();
+                    this.adminClient.adminModifyHourlyPay();
                     break;
                 case 0:
                     System.out.println();

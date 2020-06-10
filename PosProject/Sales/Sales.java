@@ -24,9 +24,9 @@ public class Sales {
     }
 
     public String getOnlyMonth() {
-        String[] onlyDay = this.day.split("-");
+        String[] onlyMonth = this.day.split("-");
 
-        return onlyDay[1];
+        return onlyMonth[1];
     }
 
     public void setTodaySales(int todaySales) {

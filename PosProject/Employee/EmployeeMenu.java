@@ -21,12 +21,12 @@ public class EmployeeMenu {
             System.out.println("4. 마감 정산");
             System.out.println("0. 로그아웃");
             System.out.print("# 메뉴선택 >> ");
-            menu = Integer.parseInt(sc.nextLine());
+            menu = Integer.parseInt(this.sc.nextLine());
             System.out.println();
 
             switch (menu) {
                 case 1: // 상품 판매
-                    employeeClient.employeeSaleProduct();
+                    this.employeeClient.employeeSaleProduct();
                     break;
                 case 2: // 재고 관리
                     this.employeeManageStock();
@@ -62,18 +62,18 @@ public class EmployeeMenu {
             System.out.println("3. 상품 발주");
             System.out.println("0. 이전 메뉴");
             System.out.print("# 메뉴선택 >> ");
-            menu = Integer.parseInt(sc.nextLine());
+            menu = Integer.parseInt(this.sc.nextLine());
             System.out.println();
 
             switch (menu) {
                 case 1: // 전체 재고 조회
-                    employeeClient.employeeCheckAllProduct();
+                    this.employeeClient.employeeCheckAllProduct();
                     break;
                 case 2: // 재고 부족 상품 조회
-                    employeeClient.employeeCheckLackProduct();
+                    this.employeeClient.employeeCheckLackProduct();
                     break;
                 case 3: // 상품 발주
-                    employeeClient.employeeOrderProduct();
+                    this.employeeClient.employeeOrderProduct();
                     break;
                 case 0: // 이전 메뉴
                     System.out.println();
@@ -99,15 +99,15 @@ public class EmployeeMenu {
             System.out.println("2. 퇴근 시간 기록");
             System.out.println("0. 이전 메뉴");
             System.out.print("# 메뉴선택 >> ");
-            menu = Integer.parseInt(sc.nextLine());
+            menu = Integer.parseInt(this.sc.nextLine());
             System.out.println();
 
             switch (menu) {
                 case 1: // 출근 시간 기록
-                    employeeClient.employeeRecordWorkStartTime();
+                    this.employeeClient.employeeRecordWorkStartTime();
                     break;
                 case 2: // 퇴근 시간 기록
-                    employeeClient.employeeRecordWorkEndTime();
+                    this.employeeClient.employeeRecordWorkEndTime();
                     break;
                 case 0: // 이전 메뉴
                     System.out.println();
@@ -133,15 +133,15 @@ public class EmployeeMenu {
             System.out.println("2. 금일 매출 기록");
             System.out.println("0. 이전 메뉴");
             System.out.print("# 메뉴선택 >> ");
-            menu = Integer.parseInt(sc.nextLine());
+            menu = Integer.parseInt(this.sc.nextLine());
             System.out.println();
 
             switch (menu) {
                 case 1: // 정산 확인
-                    employeeClient.employeeCheckCurrentSales();
+                    this.employeeClient.employeeCheckCurrentSales();
                     break;
                 case 2: // 금일 매출 기록
-                    employeeClient.employeeRecordTotalSales();
+                    this.employeeClient.employeeRecordTotalSales();
                     break;
                 case 0: // 이전 메뉴
                     System.out.println();
