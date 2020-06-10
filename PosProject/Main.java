@@ -3,6 +3,7 @@ package PosProject;
 import java.util.Scanner;
 
 import PosProject.Admin.AdminMenu;
+import PosProject.Employee.CommuteManage;
 import PosProject.Employee.EmployeeManage;
 import PosProject.Employee.EmployeeMenu;
 import PosProject.Product.ProductManage;
@@ -13,6 +14,7 @@ public class Main {
     public static EmployeeManage employeeManage = new EmployeeManage();
     public static ProductManage productManage = new ProductManage();
     public static SalesManage salesManage = new SalesManage();
+    public static CommuteManage commuteManage = new CommuteManage();
 
     private void login() {
         Scanner sc = new Scanner(System.in);

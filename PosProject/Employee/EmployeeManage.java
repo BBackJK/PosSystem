@@ -1,11 +1,6 @@
 package PosProject.Employee;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Vector;
 
 public class EmployeeManage {
@@ -25,7 +20,7 @@ public class EmployeeManage {
         try {
             while ((data = br.readLine()) != null) {
                 String[] p = data.split(" / ");
-                this.employeeList.add(new Employee(p[0], p[1]));
+                this.employeeList.add(new Employee(p[0], p[1], Integer.parseInt(p[2])));
             }
         } catch (IOException e) {
             System.out.println("employeeList.txt를 readline()으로 읽을 수 없습니다.");
@@ -43,14 +38,14 @@ public class EmployeeManage {
         PrintWriter pw = new PrintWriter(fw);
 
         for (Employee e : this.employeeList) {
-            String data = e.getID() + " / " + e.getPW();
+            String data = e.getID() + " / " + e.getPW() + " / " + e.getHourlyPay();
             pw.println(data);
         }
         pw.flush();
     }
 
-    public void add(String id, String pw) {
-        this.employeeList.add(new Employee(id, pw));
+    public void add(Employee e) {
+        this.employeeList.add(e);
     }
 
     public void remove(String id) {
@@ -78,6 +73,15 @@ public class EmployeeManage {
             }
         }
         return false;
+    }
+
+    public int getEmployeeHourlyPay(String id) {
+        for(Employee e : this.employeeList) {
+            if(id.equals(e.getID())) {
+                return e.getHourlyPay();
+            }
+        } 
+        return 0;
     }
 
     public void print() {

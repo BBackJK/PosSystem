@@ -15,7 +15,10 @@ public class EmployeeClient {
 
     private ProductManage productManage = Main.productManage;
     private SalesManage salesManage = Main.salesManage;
+    private CommuteManage commuteManage = Main.commuteManage;
     private int totalTodaySales = 0;
+    private String startTime = "0";
+    private String endTime = "0";
 
     // 직원 상품 판매
     public void employeeSaleProduct() {
@@ -99,12 +102,80 @@ public class EmployeeClient {
     }
 
     // 직원 출/퇴근 기록
-    public void employeeRecordWorkStartTime() {
-
+    public void employeeRecordWorkStartTime(String loginId) {
+        System.out.println("===== 직원 출근 시간 기록 =====");
+        System.out.println();
+        this.startTime = this.dateUtils.getToDate();
+        this.commuteManage.add(new Commute(loginId, this.startTime, this.endTime));
+        this.commuteManage.save();
+        System.out.println(loginId + " 님 출근 시간이 기록 되었습니다.");
+        System.out.println();
     }
 
-    public void employeeRecordWorkEndTime() {
+    public void employeeRecordWorkEndTime(String loginId) {
+        System.out.println("===== 직원 퇴근 시간 기록 =====");
+        System.out.println();
+        if (this.startTime == "0") {
+            System.out.println("출근 시간부터 기록해주세요!");
+            System.out.println();
+            return;
+        }
+        this.endTime = this.dateUtils.getToDate();
+        this.commuteManage.setEndTime(loginId, this.startTime, this.endTime);
+        this.commuteManage.save();
+        this.startTime = "0";
+        this.endTime = "0";
+        System.out.println(loginId + " 님 퇴근 시간이 기록 되었습니다.");
+        System.out.println();
+    }
 
+    public void employeeWantToStartTime(String loginId) {
+        System.out.println("===== 직원 출근 시간 기록 =====");
+        System.out.println();
+        System.out.print("년도(YYYY)를 입력해주세요: ");
+        int year = Integer.parseInt(sc.nextLine());
+        System.out.print("월(MM)을 입력해주세요: ");
+        int month = Integer.parseInt(sc.nextLine());
+        System.out.print("일(DD)을 입력해주세요: ");
+        int day = Integer.parseInt(sc.nextLine());
+        System.out.print("시(HH)를 입력해주세요: ");
+        int hour = Integer.parseInt(sc.nextLine());
+        System.out.print("분(MM)를 입력해주세요: ");
+        int minute = Integer.parseInt(sc.nextLine());
+        System.out.println();
+        this.startTime = this.dateUtils.wantToDate(year, month, day, hour, minute);
+        this.commuteManage.add(new Commute(loginId, this.startTime, this.endTime));
+        this.commuteManage.save();
+        System.out.println(loginId + " 님 출근 시간이 기록 되었습니다.");
+        System.out.println();
+    }
+
+    public void employeeWantToEndTime(String loginId) {
+        System.out.println("===== 직원 퇴근 시간 기록 =====");
+        System.out.println();
+        if (this.startTime == "0") {
+            System.out.println("출근 시간부터 기록해주세요!");
+            System.out.println();
+            return;
+        }
+        System.out.print("년도(YYYY)를 입력해주세요: ");
+        int year = Integer.parseInt(sc.nextLine());
+        System.out.print("월(MM)을 입력해주세요: ");
+        int month = Integer.parseInt(sc.nextLine());
+        System.out.print("일(DD)을 입력해주세요: ");
+        int day = Integer.parseInt(sc.nextLine());
+        System.out.print("시(HH)를 입력해주세요: ");
+        int hour = Integer.parseInt(sc.nextLine());
+        System.out.print("분(MM)를 입력해주세요: ");
+        int minute = Integer.parseInt(sc.nextLine());
+        System.out.println();
+        this.endTime = this.dateUtils.wantToDate(year, month, day, hour, minute);
+        this.commuteManage.setEndTime(loginId, this.startTime, this.endTime);
+        this.commuteManage.save();
+        this.startTime = "0";
+        this.endTime = "0";
+        System.out.println(loginId + " 님 퇴근 시간이 기록 되었습니다.");
+        System.out.println();
     }
 
     // 직원 마감 정산
@@ -118,10 +189,33 @@ public class EmployeeClient {
     public void employeeRecordTotalSales() {
         System.out.println("===== 직원 금일 매출 기록 =====");
         System.out.println();
-        System.out.println("오늘 날짜: " + this.dateUtils.getToday());
+        String today = this.dateUtils.getToday();
+        System.out.println("오늘 날짜: " + today);
         System.out.println("오늘 총 매출액: " + this.totalTodaySales);
         System.out.println();
-        this.salesManage.add(new Sales(this.dateUtils.getToday(), this.totalTodaySales));
+        this.salesManage.add(new Sales(today, this.totalTodaySales));
+        this.salesManage.save();
+        System.out.println("오늘 매출액이 기록 되었습니다.");
+        System.out.println();
+    }
+
+    public void employeeWantToRecord() {
+        System.out.println("===== 직원 금일 매출 기록 =====");
+        System.out.println();
+        System.out.print("년도(YYYY)를 입력해주세요: ");
+        int year = Integer.parseInt(sc.nextLine());
+        System.out.print("월(MM)을 입력해주세요: ");
+        int month = Integer.parseInt(sc.nextLine());
+        System.out.print("일(DD)을 입력해주세요: ");
+        int day = Integer.parseInt(sc.nextLine());
+        System.out.print("매출 금액을 입력해주세요: ");
+        int wantToPay = Integer.parseInt(sc.nextLine());
+        System.out.println();
+        String today = this.dateUtils.wantToDay(year, month, day);
+        System.out.println("지정한 날짜: " + today);
+        System.out.println("오늘 총 매출액: " + wantToPay);
+        System.out.println();
+        this.salesManage.add(new Sales(today, wantToPay));
         this.salesManage.save();
         System.out.println("오늘 매출액이 기록 되었습니다.");
         System.out.println();

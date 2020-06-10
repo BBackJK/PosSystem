@@ -4,12 +4,15 @@ import java.util.Scanner;
 
 public class EmployeeMenu {
     private Scanner sc = new Scanner(System.in);
+    private String id;
+
     private EmployeeClient employeeClient = new EmployeeClient();
 
     public void employeeHome(String id) {
+        this.id = id;
         int menu;
 
-        System.out.println(id + " 님 좋은 하루입니다.");
+        System.out.println(this.id + " 님 좋은 하루되세요.");
         System.out.println();
 
         do {
@@ -97,6 +100,8 @@ public class EmployeeMenu {
             System.out.println();
             System.out.println("1. 출근 시간 기록");
             System.out.println("2. 퇴근 시간 기록");
+            System.out.println("3. (테스트용도)원하는 시간 입력받아서 출근 시간 기록");
+            System.out.println("4. (테스트용도)원하는 시간 입력받아서 퇴근 시간 기록");
             System.out.println("0. 이전 메뉴");
             System.out.print("# 메뉴선택 >> ");
             menu = Integer.parseInt(this.sc.nextLine());
@@ -104,10 +109,16 @@ public class EmployeeMenu {
 
             switch (menu) {
                 case 1: // 출근 시간 기록
-                    this.employeeClient.employeeRecordWorkStartTime();
+                    this.employeeClient.employeeRecordWorkStartTime(this.id);
                     break;
                 case 2: // 퇴근 시간 기록
-                    this.employeeClient.employeeRecordWorkEndTime();
+                    this.employeeClient.employeeRecordWorkEndTime(this.id);
+                    break;
+                case 3: // 특정 시간 기록
+                    this.employeeClient.employeeWantToStartTime(this.id);
+                    break;
+                case 4: // 특정 시간 기록
+                    this.employeeClient.employeeWantToEndTime(this.id);
                     break;
                 case 0: // 이전 메뉴
                     System.out.println();
@@ -131,6 +142,7 @@ public class EmployeeMenu {
             System.out.println();
             System.out.println("1. 정산 확인");
             System.out.println("2. 금일 매출 기록");
+            System.out.println("3. (테스트용도)원하는 날짜 입력받아서 원하는 매출 기록");
             System.out.println("0. 이전 메뉴");
             System.out.print("# 메뉴선택 >> ");
             menu = Integer.parseInt(this.sc.nextLine());
@@ -142,6 +154,9 @@ public class EmployeeMenu {
                     break;
                 case 2: // 금일 매출 기록
                     this.employeeClient.employeeRecordTotalSales();
+                    break;
+                case 3:
+                    this.employeeClient.employeeWantToRecord();
                     break;
                 case 0: // 이전 메뉴
                     System.out.println();

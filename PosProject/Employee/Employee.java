@@ -3,10 +3,12 @@ package PosProject.Employee;
 public class Employee {
     private String id;
     private String pw;
+    private int hourlyPay;
 
-    Employee(String id, String pw) {
+    public Employee(String id, String pw, int pay) {
         this.id = id;
         this.pw = pw;
+        this.hourlyPay = pay;
     }
 
     public String getID() {
@@ -23,6 +25,14 @@ public class Employee {
 
     public void setPW(String pw) {
         this.pw = pw;
+    }
+
+    public int getHourlyPay() {
+        return this.hourlyPay;
+    }
+
+    public void setHoulyPay(int pay) {
+        this.hourlyPay = pay;
     }
 
     public void print() {

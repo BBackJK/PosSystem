@@ -3,20 +3,21 @@ package PosProject.Admin;
 import java.util.Scanner;
 
 import PosProject.Main;
+import PosProject.Employee.CommuteManage;
+import PosProject.Employee.Employee;
 import PosProject.Employee.EmployeeManage;
 import PosProject.Product.Product;
 import PosProject.Product.ProductManage;
 import PosProject.Sales.SalesManage;
-import PosProject.Utils.DateOfUtils;
 
 public class AdminClient {
 
     private Scanner sc = new Scanner(System.in);
-    private DateOfUtils dayUtils = new DateOfUtils();
     
     private EmployeeManage employeeManage = Main.employeeManage;
     private ProductManage productManage = Main.productManage;
     private SalesManage salesManage = Main.salesManage;
+    private CommuteManage commuteManage = Main.commuteManage;
 
     // 관리자 직원 관리
     public void adminAddEmployee() {
@@ -26,7 +27,7 @@ public class AdminClient {
         String id = this.sc.nextLine();
         System.out.print("직원의 PW(생년월일)을 입력하세요: ");
         String pw = this.sc.nextLine();
-        this.employeeManage.add(id, pw);
+        this.employeeManage.add(new Employee(id, pw, 6580));
         this.employeeManage.save();
         System.out.println();
         System.out.println(id + " 님이 등록 되었습니다.");
@@ -168,11 +169,49 @@ public class AdminClient {
 
     // 관리자 직원 월급 관리
     public void adminCheckCommute() {
-        System.out.println(" 직원 출/퇴근 시간 조회 메뉴 ");
+        System.out.println("===== 관리자 직원 출/퇴근 시간 조회 =====");
+        System.out.println();
+        System.out.print("조회하고 싶은 직원의 이름을 입력해주세요: ");
+        String name = this.sc.nextLine();
+        if(!this.commuteManage.checkName(name)) {
+            System.out.println();
+            System.out.println("해당 직원은 없습니다. 다시 확인하시고 입력해주세요.");
+            System.out.println();
+            return;
+        }
+        
+        System.out.print("조회하실 [월]을 입력해주세요(ex. 05): ");
+        String month = this.sc.nextLine();
+        System.out.print("조회하실 [일]을 입력해주세요(ex. 05): ");
+        String day = this.sc.nextLine();
+
+        System.out.println();
+        this.commuteManage.monthAndDayPrint(name, month, day);
+        System.out.println();
+
     }
 
     public void adminCheckMonthlyPay() {
-        System.out.println(" 직원 월급 조회 메뉴 ");
+        System.out.println("===== 관리자 직원 월급 조회 =====");
+        System.out.println();
+        System.out.print("조회하고 싶은 직원의 ID을 입력해주세요: ");
+        String id = this.sc.nextLine();
+        if(!this.commuteManage.checkName(id)) {
+            System.out.println();
+            System.out.println("해당 직원은 없습니다. 다시 확인하시고 입력해주세요.");
+            System.out.println();
+            return;
+        }
+        System.out.print("조회하실 [월]을 입력해주세요(ex. 05): ");
+        String month = this.sc.nextLine();
+
+        System.out.println();
+        double hour = this.commuteManage.checkMonthlyTime(id, month);
+        int hourlyPay = this.employeeManage.getEmployeeHourlyPay(id);
+        System.out.println(id + " 님의 시급: " + hourlyPay );
+        System.out.println("총 근무시간: " + hour);
+        System.out.println(id + " 님의 총 월급: " + hour * hourlyPay);
+        System.out.println();
     }
 
     public void adminCheckHourlyPay() {

@@ -169,9 +169,9 @@ public class AdminMenu {
             System.out.println("===== 관리자 월급 관리 메뉴 =====");
             System.out.println();
             System.out.println("1. 직원 출/퇴근 시간 조회");
-            System.out.println("2. 직원 시급 조회");
-            System.out.println("3. 직원 시급 변경");
-            System.out.println("4. 직원 월급 조회");
+            System.out.println("2. 직원 월급 조회");
+            System.out.println("3. 직원 시급 조회");
+            System.out.println("4. 직원 시급 변경");
             System.out.println("0. 이전 메뉴");
             System.out.print("# 메뉴선택 >> ");
             menu = Integer.parseInt(this.sc.nextLine());
