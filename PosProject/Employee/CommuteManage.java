@@ -74,9 +74,9 @@ public class CommuteManage {
         this.commuteList.get(idx).setEndTime(endTime);
     }
 
-    public boolean checkName(String name) {
+    public boolean checkCommute(String id) {
         for(Commute c : this.commuteList) {
-            if (name.equals(c.getLoginID())) {
+            if (id.equals(c.getLoginID())) {
                 return true;
             }
         }
@@ -98,22 +98,25 @@ public class CommuteManage {
 
     public double checkMonthlyTime(String name, String month) {
         long diff;
-        double hour1;
+        double hour;
+        double totalHour = 0;
         for(Commute c : this.commuteList) {
             if(month.equals(c.getOnlyMonth()) && name.equals(c.getLoginID()) && (!c.getEndTime().equals("0"))) {
-                System.out.println(c.getOnlyStartTime());
-                System.out.println(c.getOnlyEndTime());
                 try {
                     Date endTime = format.parse(c.getOnlyEndTime());
                     Date startTime = format.parse(c.getOnlyStartTime());
                     diff = endTime.getTime() - startTime.getTime();
-                    hour1 = diff / (double)3600000;
-                    return (Math.round(hour1*10)/10.0);     // 반올림
+                    hour = diff / (double)3600000;
+                    double Chour = Math.round(hour*10)/10.0;
+                    if (Chour < 0) {
+                        Chour = 24 + Chour;
+                    }
+                    totalHour += Chour;
                 } catch (Exception e) {
                     System.out.println("예외 에러처리");
                 }
             }
         }
-        return (Double) null;
+        return totalHour;
     }
 }

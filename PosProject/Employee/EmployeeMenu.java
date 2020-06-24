@@ -112,13 +112,13 @@ public class EmployeeMenu {
                     this.employeeClient.employeeRecordWorkStartTime(this.id);
                     break;
                 case 2: // 퇴근 시간 기록
-                    this.employeeClient.employeeRecordWorkEndTime(this.id);
+                    this.employeeClient.employeeRecordWorkEndTime();
                     break;
                 case 3: // 특정 시간 기록
                     this.employeeClient.employeeWantToStartTime(this.id);
                     break;
                 case 4: // 특정 시간 기록
-                    this.employeeClient.employeeWantToEndTime(this.id);
+                    this.employeeClient.employeeWantToEndTime();
                     break;
                 case 0: // 이전 메뉴
                     System.out.println();

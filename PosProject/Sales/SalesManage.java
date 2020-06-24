@@ -19,7 +19,7 @@ public class SalesManage {
         try {
             while ((data = br.readLine()) != null) {
                 String[] p = data.split(" / ");
-                this.salesList.add(new Sales(p[0], Integer.parseInt(p[1])));
+                this.salesList.add(new Sales(p[0], Integer.parseInt(p[1]), p[2]));
             }
         } catch (IOException e) {
             System.out.println("SalesManage.txt를 readLine()으로 읽을 수 없습니다.");
@@ -37,7 +37,7 @@ public class SalesManage {
 
         PrintWriter pw = new PrintWriter(fw);
         for (Sales s : this.salesList) {
-            String data = s.getDay() + " / " + s.getTodaySales();
+            String data = s.getDay() + " / " + s.getTodaySales() + " / " + s.getEmployee();
             pw.println(data);
         }
         pw.flush();
@@ -67,12 +67,11 @@ public class SalesManage {
             if (month.equals(s.getOnlyMonth())) {
                 i = 1;
                 totalMonthSales += s.getTodaySales();
-                return totalMonthSales;
             }
         }
         if (i == 0) {
             return 0;
         }
-        return 1;
+        return totalMonthSales;
     }
 }

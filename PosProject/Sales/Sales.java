@@ -3,10 +3,12 @@ package PosProject.Sales;
 public class Sales {
     private String day;
     private int todaySales;
+    private String employee;
 
-    public Sales(String day, int todaySales) {
+    public Sales(String day, int todaySales, String employee) {
         this.day = day;
         this.todaySales = todaySales;
+        this.employee = employee;
     }
 
     public int getTodaySales() {
@@ -15,6 +17,10 @@ public class Sales {
 
     public String getDay() {
         return this.day;
+    }
+    
+    public String getEmployee() {
+        return this.employee;
     }
 
     public String getOnlyDay() {
@@ -37,7 +43,11 @@ public class Sales {
         this.day = day;
     }
 
+    public void setEmployee(String employee) {
+        this.employee = employee;
+    }
+
     public void print() {
-        System.out.println("판매 날짜: " + this.day + " / 매출액 : " + this.todaySales);
+        System.out.println("판매 날짜: " + this.day + " / 매출액 : " + this.todaySales + " / 근무자 : " + this.employee);
     }
 }

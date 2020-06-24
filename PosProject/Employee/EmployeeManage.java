@@ -93,4 +93,27 @@ public class EmployeeManage {
             }
         }
     }
+
+    public void hourlyPayPrint() {
+        for (Employee e : this.employeeList) {
+            System.out.println("직원: " + e.getID() + " / 시급: " + e.getHourlyPay());
+        }
+    }
+
+    public void setHourlyPay(String id, int pay) {
+        int idx = -1;
+        for(int i = 0; i < this.employeeList.size(); i++) {
+            if (id.equals(this.employeeList.get(i).getID())) {
+                idx = 1;
+                break;
+            }
+        }
+
+        if (idx < 0) {
+            System.out.println("해당 직원은 없는 직원입니다. 다시 확인하고 입력해주세요! ");
+            return;
+        }
+
+        this.employeeList.get(idx).setHourlyPay(pay);
+    }
 }

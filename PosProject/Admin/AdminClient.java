@@ -172,10 +172,17 @@ public class AdminClient {
         System.out.println("===== 관리자 직원 출/퇴근 시간 조회 =====");
         System.out.println();
         System.out.print("조회하고 싶은 직원의 이름을 입력해주세요: ");
-        String name = this.sc.nextLine();
-        if(!this.commuteManage.checkName(name)) {
+        String id = this.sc.nextLine();
+        if (!this.commuteManage.checkCommute(id)) {
+
+            if(!this.employeeManage.idCheck(id)) {
+                System.out.println();
+                System.out.println("해당 직원은 없습니다. 다시 확인하시고 입력해주세요.");
+                System.out.println();
+                return;
+            }
             System.out.println();
-            System.out.println("해당 직원은 없습니다. 다시 확인하시고 입력해주세요.");
+            System.out.println("해당 직원은 근무하지 않았습니다.");
             System.out.println();
             return;
         }
@@ -186,7 +193,7 @@ public class AdminClient {
         String day = this.sc.nextLine();
 
         System.out.println();
-        this.commuteManage.monthAndDayPrint(name, month, day);
+        this.commuteManage.monthAndDayPrint(id, month, day);
         System.out.println();
 
     }
@@ -194,11 +201,18 @@ public class AdminClient {
     public void adminCheckMonthlyPay() {
         System.out.println("===== 관리자 직원 월급 조회 =====");
         System.out.println();
-        System.out.print("조회하고 싶은 직원의 ID을 입력해주세요: ");
+        System.out.print("조회하고 싶은 직원의 이름을 입력해주세요: ");
         String id = this.sc.nextLine();
-        if(!this.commuteManage.checkName(id)) {
+        if (!this.commuteManage.checkCommute(id)) {
+            
+            if(!this.employeeManage.idCheck(id)) {
+                System.out.println();
+                System.out.println("해당 직원은 없습니다. 다시 확인하시고 입력해주세요.");
+                System.out.println();
+                return;
+            }
             System.out.println();
-            System.out.println("해당 직원은 없습니다. 다시 확인하시고 입력해주세요.");
+            System.out.println("해당 직원은 근무하지 않았습니다.");
             System.out.println();
             return;
         }
@@ -215,10 +229,40 @@ public class AdminClient {
     }
 
     public void adminCheckHourlyPay() {
-        System.out.println(" 직원 시급 관리 메뉴 ");
+        System.out.println("===== 관리자 직원 시급 조회 =====");
+        System.out.println();
+        this.employeeManage.hourlyPayPrint();
+        System.out.println();
     }
 
     public void adminModifyHourlyPay() {
-        System.out.println(" 직원 시급 변경 메뉴 ");
+        System.out.println("===== 관리자 직원 시급 변경 =====");
+        System.out.println();
+        System.out.print("변경하고 싶은 직원의 이름을 입력해주세요: ");
+        String id = this.sc.nextLine();
+        if (!this.commuteManage.checkCommute(id)) {
+            
+            if(!this.employeeManage.idCheck(id)) {
+                System.out.println();
+                System.out.println("해당 직원은 없습니다. 다시 확인하시고 입력해주세요.");
+                System.out.println();
+                return;
+            }
+            System.out.println();
+            System.out.println("해당 직원은 근무하지 않았습니다.");
+            System.out.println();
+            return;
+        }
+
+        int hourlyPay = this.employeeManage.getEmployeeHourlyPay(id);
+        System.out.println("조회하신 직원 " + id + " 의 시급은 " + hourlyPay + " 입니다.");
+        System.out.println();
+        System.out.print("변경하실 시급을 입력해주세요: ");
+        int MhourlyPay = Integer.parseInt(this.sc.nextLine());
+
+        this.employeeManage.setHourlyPay(id, MhourlyPay);
+        this.employeeManage.save();
+        System.out.println("조회하신 직원 " + id + " 의 시급이 " + MhourlyPay + " 로 변경되었습니다.");
+        System.out.println();
     }
 }

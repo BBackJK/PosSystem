@@ -3,12 +3,11 @@ package PosProject.Employee;
 public class Employee {
     private String id;
     private String pw;
-    private int hourlyPay;
+    private int hourlyPay = 6580;
 
     public Employee(String id, String pw, int pay) {
         this.id = id;
         this.pw = pw;
-        this.hourlyPay = pay;
     }
 
     public String getID() {
@@ -31,12 +30,8 @@ public class Employee {
         return this.hourlyPay;
     }
 
-    public void setHoulyPay(int pay) {
+    public void setHourlyPay(int pay) {
         this.hourlyPay = pay;
-    }
-
-    public void print() {
-        System.out.println("ID(이름): " + this.id + " / PW(생년월일): " + this.pw);
     }
 
     public boolean loginEquals(String id, String pw) {
@@ -53,5 +48,9 @@ public class Employee {
         } else {
             return false;
         }
+    }
+
+    public void print() {
+        System.out.println("ID(이름): " + this.id + " / PW(생년월일): " + this.pw);
     }
 }
